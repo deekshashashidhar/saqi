@@ -322,7 +322,7 @@ function renderAdviser() {
   const w = 480, h = 360, la0 = 22.7, la1 = 25.7, lo0 = 53.3, lo1 = 56.3;
   const X = lo => 20 + (lo - lo0) / (lo1 - lo0) * (w - 40), Y = la => 20 + (la1 - la) / (la1 - la0) * (h - 40);
   $('#advMap').innerHTML = `<div class="row" style="margin-bottom:.5rem"><label style="margin:0">Region:</label><select id="advRegionSel" style="max-width:170px">${['All', 'Al Ain', 'Liwa', 'Al Dhaid', 'Madinat Zayed'].map(r => `<option value="${r}" ${r === advRegion ? 'selected' : ''}>${r === 'All' ? 'All regions (40)' : r}</option>`).join('')}</select></div>
-    <svg viewBox="0 0 ${w} ${h}" width="100%" style="max-width:${w}px;background:var(--map-bg);border:1px solid var(--map-border);border-radius:16px">
+    <svg viewBox="0 0 ${w} ${h}" width="100%" style="max-width:600px;display:block;margin:0 auto;background:var(--map-bg);border:1px solid var(--map-border);border-radius:16px">
     ${[['Al Ain', 24.2, 55.7], ['Liwa', 23.1, 53.8], ['Al Dhaid', 25.3, 55.9], ['Madinat Zayed', 23.7, 53.7]].map(g => `<text x="${X(g[2])}" y="${Y(g[1]) - 34}" font-size="12" text-anchor="middle" fill="var(--chart-axis)">${g[0]}</text>`).join('')}
     ${F.slice().reverse().map(f => `<circle cx="${X(f.lon)}" cy="${Y(f.lat)}" r="${5 + f.score / 15}" fill="${riskColor(f.score)}" opacity=".9" stroke="var(--background)"><title>${f.id} ${CROPS[f.crop].name} · risk ${f.score}</title></circle>`).join('')}
     ${F.slice(0, 5).map((f, i) => `<text x="${X(f.lon) + 9}" y="${Y(f.lat) + 4}" font-size="11" font-weight="700" fill="var(--chart-text)">${i + 1}</text>`).join('')}</svg>
